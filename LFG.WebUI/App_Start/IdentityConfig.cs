@@ -1,5 +1,6 @@
 ﻿using LFG.Domain.Concrete;
 using LFG.Domain.Entities;
+using LFG.Domain.Infrastructure;
 using LFG.WebUI.Infrastructure;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;

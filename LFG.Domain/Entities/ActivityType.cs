@@ -12,6 +12,7 @@ namespace LFG.Domain.Entities
     public class ActivityType
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid ActivityTypeId { get; set; }
         public string ActivityTypeTitle { get; set; }
 

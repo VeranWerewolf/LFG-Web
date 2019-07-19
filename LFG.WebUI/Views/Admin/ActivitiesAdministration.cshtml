@@ -1,0 +1,77 @@
+﻿@model IEnumerable<LFG.Domain.Entities.Activity>
+
+@{
+    ViewBag.Title = "ActivitiesAdministration";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>ActivitiesAdministration</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ActivityName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ActivityDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ActivityPostDayTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ActivityStartDayTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ActivityEndDayTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsCommited)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ActivityAccessType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ActivityAccess)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ActivityName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ActivityDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ActivityPostDayTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ActivityStartDayTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ActivityEndDayTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsCommited)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ActivityAccessType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ActivityAccess)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "EditActivity", new { id = item.ActivityId }) |
+            @Html.ActionLink("Commit", "CommitActivity", new { id = item.ActivityId }) |
+            @Html.ActionLink("Details", "DetailsActivity", new { id = item.ActivityId }) |
+            @Html.ActionLink("Delete", "DeleteActivity", new { id = item.ActivityId })
+        </td>
+    </tr>
+}
+
+</table>

@@ -29,24 +29,32 @@ namespace LFG.Domain.Entities
         public virtual ICollection<AppUser> AppUser { get; set; }
 
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid ActivityId { get; set; }
         [Required]
+        [Display(Name = "Название")]
         public string ActivityName { get; set; }
-        [Required]
+        [DataType(DataType.MultilineText)]
+        [Display(Name = "Описание")]
         public string ActivityDescription { get; set; }
         
         [Required]
+        [Display(Name = "Дата создания")]
         [Column(TypeName = "datetime2")]
         public DateTime ActivityPostDayTime { get; set; }
         [Required]
+        [Display(Name = "Дата Начала")]
         [Column(TypeName = "datetime2")]
         public DateTime ActivityStartDayTime { get; set; }
         [Column(TypeName = "datetime2")]
+        [Display(Name = "Дата окончания")]
         public Nullable<DateTime> ActivityEndDayTime { get; set; }
+        public Nullable<bool> IsCommited { get; set; }
+        public virtual AppUser CommitCreator { get; set; }
         public virtual ActivityType ActivityTypeCurrent { get; set; }
         //public GeoLocation ActivityStartGEO { get; set; }
         //public GeoLocation ActivityEndGEO { get; set; }
-        public AppUser ActivityCreator { get; set; }
+        public virtual AppUser ActivityCreator { get; set; }
 
 
         [Required]

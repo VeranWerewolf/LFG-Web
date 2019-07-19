@@ -1,10 +1,11 @@
-﻿using System;
+﻿using LFG.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LFG.Domain.Entities
+namespace LFG.WebUI.Models
 {
     public class SubList
     {

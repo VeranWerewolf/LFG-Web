@@ -9,20 +9,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace LFG.WebUI.Infrastructure
+namespace LFG.Domain.Infrastructure
 {
     public class AppUserManager : UserManager<AppUser>
     {
         public AppUserManager(IUserStore<AppUser> store)
             : base(store)
-        {
-        }
+        { }
 
         // this method is called by Owin therefore this is the best place to configure your User Manager
         public static AppUserManager Create(
             IdentityFactoryOptions<AppUserManager> options, IOwinContext context)
         {
-            var manager = new AppUserManager(
+            AppUserManager manager = new AppUserManager(
                 new UserStore<AppUser>(context.Get<EFDbContext>()));
 
             // optionally configure your manager

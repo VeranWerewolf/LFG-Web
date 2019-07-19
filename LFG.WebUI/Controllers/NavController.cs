@@ -17,6 +17,12 @@ namespace LFG.WebUI.Controllers
             repository = repo;
         }
 
+        public PartialViewResult UserTopPanel()
+        {
+            return PartialView();
+        }
+
+
         //UnitTest1 - Can_Create_Categories(), Indicates_Selected_Category()
         public PartialViewResult Menu(string category = null)
         {

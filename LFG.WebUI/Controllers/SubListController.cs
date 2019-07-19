@@ -1,5 +1,6 @@
 ﻿using LFG.Domain.Abstract;
 using LFG.Domain.Entities;
+using LFG.WebUI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,9 @@ namespace LFG.WebUI.Controllers
     public class SubListController : Controller
     {
         private IActivityRepository repository;
+
+
+
         public SubListController(IActivityRepository repo)
         {
             repository = repo;

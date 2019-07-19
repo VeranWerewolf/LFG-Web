@@ -12,5 +12,20 @@ namespace LFG.Domain.Concrete
         {
             get { return context.Activities; }
         }
+
+        public void SaveActivity(Activity activity)
+        {
+            if (activity.ActivityId == null) {
+            context.Activities.Add(activity);}
+            else
+            {
+                Activity dbEntry = context.Activities.Find(activity.ActivityId);
+                if (dbEntry != null)
+                {
+                    dbEntry = activity;
+                }
+            }
+            context.SaveChanges();
+        }
     }
 }

@@ -3,6 +3,8 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using LFG.Domain.Infrastructure;
+using Microsoft.AspNet.Identity;
 
 namespace LFG.Domain.Concrete
 {
@@ -31,6 +33,34 @@ namespace LFG.Domain.Concrete
         }
         public void PerformInitialSetup(EFDbContext context)
         {
+            AppUserManager userMgr = new AppUserManager(new UserStore<AppUser>(context));
+            AppRoleManager roleMgr = new AppRoleManager(new RoleStore<AppRole>(context));
+
+            string roleName = "Administrators";
+            string userName = "Admin";
+            string password = "12211221";
+            string email = "mike.gusev.val@gmail.com";
+
+            if (!roleMgr.RoleExists(roleName))
+            {
+                roleMgr.Create(new AppRole(roleName));
+            }
+
+            AppUser user = userMgr.FindByName(userName);
+            if (user == null)
+            {
+                userMgr.Create(new AppUser { UserName = userName, Email = email },
+                    password);
+                user = userMgr.FindByName(userName);
+            }
+
+            if (!userMgr.IsInRole(user.Id, roleName))
+            {
+                userMgr.AddToRole(user.Id, roleName);
+            }
+
+
+
             // настройки конфигурации контекста указываются здесь
             ActivityType type1 = new ActivityType() { ActivityTypeId = Guid.NewGuid(), ActivityTypeTitle = "Outdoor" };
             ActivityType type2 = new ActivityType() { ActivityTypeId = Guid.NewGuid(), ActivityTypeTitle = "Indoor" };

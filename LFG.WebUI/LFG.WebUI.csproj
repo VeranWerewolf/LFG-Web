@@ -181,10 +181,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="HtmlHelpers\PagingHelper.cs" />
-    <Compile Include="Infrastructure\AppUserManager.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Models\ActivitiesListViewModel.cs" />
     <Compile Include="Models\PagingInfo.cs" />
+    <Compile Include="Models\SubList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -201,6 +201,9 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Shared\ActivitySummary.cshtml" />
     <Content Include="Views\Nav\Menu.cshtml" />
+    <Content Include="Views\Shared\_AdminLayout.cshtml" />
+    <Content Include="Views\Admin\ActivitiesAdministration.cshtml" />
+    <Content Include="Views\Admin\EditActivity.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -210,7 +213,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Admin\" />
     <Folder Include="Views\SubList\" />
     <Folder Include="Views\User\" />
   </ItemGroup>
