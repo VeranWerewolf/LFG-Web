@@ -17,7 +17,7 @@ namespace LFG.WebUI.Controllers
             repository = repo;
         }
 
-        public PartialViewResult UserTopPanel()
+        public PartialViewResult TopPanel()
         {
             return PartialView();
         }

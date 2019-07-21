@@ -40,32 +40,32 @@ namespace LFG.UnitTests
             Assert.AreEqual("Игра3", result[2].ActivityName);
         }
 
-        [TestMethod]
-        public void Index_Contains_All_Users()
-        {
-            // Организация - создание имитированного хранилища данных
-            Mock<IUserRepository> mock = new Mock<IUserRepository>();
-            mock.Setup(m => m.AppUsers).Returns(new List<AppUser>
-            {
-                new AppUser { UserName = "Юзверь1"},
-                new AppUser { UserName = "Юзверь2"},
-                new AppUser { UserName = "Юзверь3"},
-                new AppUser { UserName = "Юзверь4"},
-                new AppUser { UserName = "Юзверь5"}
-            });
+        //[TestMethod]
+        //public void Index_Contains_All_Users()
+        //{
+        //    // Организация - создание имитированного хранилища данных
+        //    Mock<IUserRepository> mock = new Mock<IUserRepository>();
+        //    mock.Setup(m => m.AppUsers).Returns(new List<AppUser>
+        //    {
+        //        new AppUser { UserName = "Юзверь1"},
+        //        new AppUser { UserName = "Юзверь2"},
+        //        new AppUser { UserName = "Юзверь3"},
+        //        new AppUser { UserName = "Юзверь4"},
+        //        new AppUser { UserName = "Юзверь5"}
+        //    });
 
-            // Организация - создание контроллера
-            AdminController controller = new AdminController(mock.Object);
+        //    // Организация - создание контроллера
+        //    AdminController controller = new AdminController(mock.Object);
 
-            // Действие
-            List<AppUser> result = ((IEnumerable<AppUser>)controller.UsersAdministration().ViewData.Model).ToList();
+        //    // Действие
+        //    List<AppUser> result = ((IEnumerable<AppUser>)controller.UsersAdministration().ViewData.Model).ToList();
 
-            // Утверждение
-            Assert.AreEqual(result.Count, 5);
-            Assert.AreEqual("Юзверь1", result[0].UserName);
-            Assert.AreEqual("Юзверь2", result[1].UserName);
-            Assert.AreEqual("Юзверь5", result[4].UserName);
-        }
+        //    // Утверждение
+        //    Assert.AreEqual(result.Count, 5);
+        //    Assert.AreEqual("Юзверь1", result[0].UserName);
+        //    Assert.AreEqual("Юзверь2", result[1].UserName);
+        //    Assert.AreEqual("Юзверь5", result[4].UserName);
+        //}
 
         [TestMethod]
         public void Can_Edit_Activity()
@@ -132,7 +132,7 @@ namespace LFG.UnitTests
             Activity game = new Activity { ActivityName = "Test" };
 
             // Действие - попытка сохранения товара
-            ActionResult result = controller.Edit(game);
+            ActionResult result = controller.EditActivity(game);
 
             // Утверждение - проверка того, что к хранилищу производится обращение
             mock.Verify(m => m.SaveActivity(game));
@@ -157,7 +157,7 @@ namespace LFG.UnitTests
             controller.ModelState.AddModelError("error", "error");
 
             // Действие - попытка сохранения товара
-            ActionResult result = controller.Edit(game);
+            ActionResult result = controller.EditActivity(game);
 
             // Утверждение - проверка того, что обращение к хранилищу НЕ производится 
             mock.Verify(m => m.SaveActivity(It.IsAny<Activity>()), Times.Never());

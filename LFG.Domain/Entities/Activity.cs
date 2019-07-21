@@ -21,39 +21,44 @@ namespace LFG.Domain.Entities
     [Table("Activities")]
     public class Activity
     {
-        //Many-to-many Activities and Users
+        //Many-to-many Activities and Users переделать
         public Activity()
         {
-            this.AppUser = new HashSet<AppUser>();
+            this.ActivityPostDayTime = DateTime.Now;
+            this.IsCommited = null;
         }
-        public virtual ICollection<AppUser> AppUser { get; set; }
+        public virtual ICollection<AppUserActivity> AppUserActivities { get; set; }
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid ActivityId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Пожалуйста, введите название мероприятия")]
         [Display(Name = "Название")]
         public string ActivityName { get; set; }
+        [Required(ErrorMessage = "Пожалуйста, введите короткое описание")]
         [DataType(DataType.MultilineText)]
         [Display(Name = "Описание")]
         public string ActivityDescription { get; set; }
-        
-        [Required]
         [Display(Name = "Дата создания")]
         [Column(TypeName = "datetime2")]
         public DateTime ActivityPostDayTime { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Пожалуйста, выберите дату и время начала")]
         [Display(Name = "Дата Начала")]
-        [Column(TypeName = "datetime2")]
         public DateTime ActivityStartDayTime { get; set; }
-        [Column(TypeName = "datetime2")]
         [Display(Name = "Дата окончания")]
         public Nullable<DateTime> ActivityEndDayTime { get; set; }
+        [Display(Name = "Одобрено")]
         public Nullable<bool> IsCommited { get; set; }
+        [Display(Name = "Одобрил")]
         public virtual AppUser CommitCreator { get; set; }
+        [DataType(DataType.MultilineText)]
+        [Display(Name = "Комментарий к одобрению")]
+        public string CommitDescription { get; set; }
+        [Display(Name = "Категория")]
         public virtual ActivityType ActivityTypeCurrent { get; set; }
         //public GeoLocation ActivityStartGEO { get; set; }
         //public GeoLocation ActivityEndGEO { get; set; }
+        [Display(Name = "Создатель")]
         public virtual AppUser ActivityCreator { get; set; }
 
 

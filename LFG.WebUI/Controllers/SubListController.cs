@@ -12,9 +12,6 @@ namespace LFG.WebUI.Controllers
     public class SubListController : Controller
     {
         private IActivityRepository repository;
-
-
-
         public SubListController(IActivityRepository repo)
         {
             repository = repo;

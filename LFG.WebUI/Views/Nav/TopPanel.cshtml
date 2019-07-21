@@ -1,0 +1,87 @@
+﻿<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">LFG - Найди себе компанию!</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="/">Главная</a></li>
+            @*Autorized*@
+            @if (Request.IsAuthenticated)
+            {
+                <li><a href="#">Создать мероприятие</a></li>
+            }
+            @*Role - Admin, Moderator*@
+            @if (Request.IsAuthenticated && User.IsInRole("Moderators"))
+            {
+                <li><a href="/Admin/CommitActivityList">Ожидают проверки</a></li>
+            }
+            @*Autorized*@
+            @if (Request.IsAuthenticated)
+            {
+                <li class="dropdown ">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        Аккаунт
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a tabindex="-1" href="/User/UserInfo">UserInfo</a>
+                        </li>
+                        <li><a tabindex="-1" href="/Claims/Index">Claims</a></li>
+                        <li class="divider"></li>
+                        <li><a tabindex="-1" href="#">Выход</a></li>
+                    </ul>
+                </li>
+            }
+        </ul>
+        @*Role Admin*@
+        @if (Request.IsAuthenticated && User.IsInRole("Administrators"))
+        {
+            <ul class="nav navbar-nav pull-right">
+                <li class="dropdown ">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        Администрирование
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a tabindex="-1" href="/Admin/ActivitiesAdministration">
+                                Мероприятия
+                            </a>
+                        </li>
+                        <li>
+                            <a tabindex="-1" href="#">
+                                Категории
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a tabindex="-1" href="/Admin/UsersAdministration">
+                                Пользователи
+                            </a>
+                        </li>
+                        <li>
+                            <a tabindex="-1" href="/Admin/RolesAdministration">
+                                Роли
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        }
+        <ul class="nav navbar-nav navbar-right">
+            @*isNotAutorized*@
+            @if (!Request.IsAuthenticated)
+            {
+
+                <li><a href="/User/Register"><span class="glyphicon glyphicon-user"></span> Регистрация</a></li>
+                <li><a href="/User/Login"><span class="glyphicon glyphicon-log-in"></span> Войти</a></li>
+            }
+            @*Autorized*@
+            @if (Request.IsAuthenticated)
+            {
+                <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Выйти</a></li>
+            }
+        </ul>
+    </div>
+</nav>

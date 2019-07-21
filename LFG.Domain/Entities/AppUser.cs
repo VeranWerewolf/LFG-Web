@@ -12,11 +12,10 @@ namespace LFG.Domain.Entities
         //add your custom properties which have not included in IdentityUser before
 
         //Many-to-many Activities and Users
+        public virtual ICollection<AppUserActivity> AppUserActivities { get; set; }
         public AppUser()
         {
-            this.Activity = new HashSet<Activity>();
+            //this.Role = user ;
         }
-        public virtual ICollection<Activity> Activity { get; set; }
     }
-
 }

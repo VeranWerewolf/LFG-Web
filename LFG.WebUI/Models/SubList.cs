@@ -9,12 +9,9 @@ namespace LFG.WebUI.Models
 {
     public class SubList
     {
-        public IEnumerable<Activity> Line
-        {
-            get { return activityLine; }
-        }
-
         private List<Activity> activityLine = new List<Activity>();
+        public IEnumerable<Activity> Line { get { return activityLine; } }
+        public decimal ComputeTotalSubs() { return activityLine.Count(); }
 
         public void SubActivity(Activity activity)
         {
@@ -26,14 +23,11 @@ namespace LFG.WebUI.Models
             activityLine.RemoveAll(l => l.ActivityId == activity.ActivityId);
         }
 
-        public decimal ComputeTotalSubs()
-        {
-            return activityLine.Count();
-        }
         public void Clear()
         {
             activityLine.Clear();
         }
+
     }
 }
 

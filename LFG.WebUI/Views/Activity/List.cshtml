@@ -6,12 +6,17 @@
     ViewBag.Title = "Ближайшие мероприятия";
 }
 
-<div class="btn-group pull-left">
-    @Html.PageLinks(Model.PagingInfo, x => Url.Action("List", new { page = x, category = Model.CurrentCategory }))
+<div id="categories" class="col-xs-3">
+    @Html.Action("Menu", "Nav")
 </div>
-<br>
-<br>
-@foreach (var p in @Model.Activities)
-{
-    @Html.Partial("ActivitySummary", p)
-}
+<div class="col-xs-8">
+    <div class="btn-group pull-left">
+        @Html.PageLinks(Model.PagingInfo, x => Url.Action("List", new { page = x, category = Model.CurrentCategory }))
+    </div>
+    <br>
+    <br>
+    @foreach (var p in @Model.Activities)
+    {
+        @Html.Partial("ActivitySummary", p)
+    }
+</div>
