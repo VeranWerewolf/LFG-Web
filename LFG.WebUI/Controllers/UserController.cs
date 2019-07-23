@@ -143,6 +143,19 @@ namespace LFG.WebUI.Controllers
             }
             return View(details);
         }
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult GoogleLogin(string returnUrl)
+        {
+            var properties = new AuthenticationProperties
+            {
+                RedirectUri = Url.Action("GoogleLoginCallback",
+                    new { returnUrl = returnUrl })
+            };
+
+            HttpContext.GetOwinContext().Authentication.Challenge(properties, "Google");
+            return new HttpUnauthorizedResult();
+        }
         [AllowAnonymous]
         public async Task<ActionResult> GoogleLoginCallback(string returnUrl)
         {
@@ -195,7 +208,8 @@ namespace LFG.WebUI.Controllers
         {
             return View(GetData("UserInfo"));
         }
-        public ActionResult Create()
+
+        public ActionResult CreateActivity()
         {
             return View();
         }

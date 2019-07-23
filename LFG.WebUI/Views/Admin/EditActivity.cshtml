@@ -9,7 +9,9 @@
 <body>
     @using (Html.BeginForm())
     {
-        @Html.AntiForgeryToken()
+        <script src="https://cdn.jsdelivr.net/momentjs/2.14.1/moment.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css">
 
         <div class="form-horizontal">
             <h4>Activity</h4>
@@ -36,7 +38,12 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.ActivityStartDayTime, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.ActivityStartDayTime, new { htmlAttributes = new { @class = "form-control" } })
+                    <div class='input-group date' id='datetimepicker1'>
+                        @Html.EditorFor(model => model.ActivityStartDayTime, new { @type = "text", @class = "form-control" })
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
                     @Html.ValidationMessageFor(model => model.ActivityStartDayTime, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -44,7 +51,12 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.ActivityEndDayTime, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.ActivityEndDayTime, new { htmlAttributes = new { @class = "form-control" } })
+                    <div class='input-group date' id='datetimepicker1'>
+                        @Html.EditorFor(model => model.ActivityEndDayTime, new { htmlAttributes = new { @class = "form-control" } })
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
                     @Html.ValidationMessageFor(model => model.ActivityEndDayTime, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -69,3 +81,9 @@
         @Html.ActionLink("Back to List", "ActivitiesAdministration")
     </div>
 </body>
+
+<script>
+    $(function () {
+        $('#datetimepicker1').datetimepicker({ showClose: true, format: 'YYYY-MM-DD HH:mm', stepping: 10 });
+    });
+</script>

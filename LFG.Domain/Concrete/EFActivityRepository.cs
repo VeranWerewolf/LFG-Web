@@ -10,7 +10,7 @@ namespace LFG.Domain.Concrete
     public class EFActivityRepository : IActivityRepository
     {
         EFDbContext context = new EFDbContext();
-        
+
 
         public IEnumerable<Activity> Activities
         {
@@ -35,6 +35,15 @@ namespace LFG.Domain.Concrete
                     dbEntry.ActivityAccess = activity.ActivityAccess;
                 }
             }
+            context.SaveChanges();
+        }
+
+        public void CreateActivity(Activity activity, AppUser currentUser)
+        {
+            AppUserManager userMgr = new AppUserManager(new UserStore<AppUser>(context));
+            AppUser user = userMgr.FindByEmail(currentUser.Email);
+            activity.ActivityCreator = user;
+            context.Activities.Add(activity);
             context.SaveChanges();
         }
 

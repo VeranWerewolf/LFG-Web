@@ -1,21 +1,33 @@
 ﻿@model LFG.Domain.Entities.Activity
 
 <div class="well">
+    <div>
+        <span class="pull-right label label-primary">
+            Опубликовано:
+            @Model.ActivityPostDayTime.ToString("dddd, dd MMMM в HH:mm", new CultureInfo("ru-RU"))
+            @Html.HiddenFor(x => x.ActivityId)
+            @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+
+        </span>
+        <br />
+        <span class="pull-right ">
+            @using (Html.BeginForm("Sub", "Activity", FormMethod.Post, new { id = Model.ActivityId }))
+            {
+                <button class="btn btn-success" type="submit">
+                    Я пойду!
+                </button>
+            }
+        </span>
+    </div>
     <h3>
-        <strong>@Model.ActivityName</strong>
+        <strong>@Html.ActionLink(Model.ActivityName, "Page", new { id = Model.ActivityId })</strong>
     </h3>
+
     <br>
     <span class="lead">@Model.ActivityDescription</span>
     @using (Html.BeginForm("SubActivity", "SubList"))
     {
-        <div class="pull-right">
-            @Html.HiddenFor(x => x.ActivityId)
-            @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
-            <input type="submit" class="btn btn-success" value="Я пойду!" />
-        </div>
+
     }
-    <span class="pull-right label label-primary">
-        Опубликовано:
-        @Model.ActivityPostDayTime.ToString("dddd, dd MMMM в HH:mm", new CultureInfo("ru-RU"))
-    </span>
+
 </div>

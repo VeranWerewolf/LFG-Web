@@ -1,0 +1,95 @@
+﻿@using LFG.WebUI.Models
+@using LFG.Domain.Infrastructure
+@using LFG.WebUI.HtmlHelpers
+@using Microsoft.AspNet.Identity
+@model ActivitiesInfoViewModel
+
+@{
+    ViewBag.Title = "Информация о мероприятии";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-xs-8 ">
+    <div>
+        <h4>Информация о мероприятии</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Activity.ActivityName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Activity.ActivityName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Activity.ActivityDescription)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Activity.ActivityDescription)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Activity.ActivityPostDayTime)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Activity.ActivityPostDayTime)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Activity.ActivityStartDayTime)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Activity.ActivityStartDayTime)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Activity.ActivityEndDayTime)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Activity.ActivityEndDayTime)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Activity.ActivityAccess)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Activity.ActivityAccess)
+            </dd>
+
+            @if (Model.Activity.ActivityCreator == Model.CurrentUser)
+            {
+                <dt>
+                    @Html.DisplayNameFor(model => model.Activity.IsCommited)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Activity.IsCommited)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Activity.CommitDescription)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Activity.CommitDescription)
+                </dd>
+            }
+        </dl>
+    </div>
+    <p>
+        @using (Html.BeginForm("Sub", "Activity", FormMethod.Post, new { id = Model.Activity.ActivityId }))
+        {
+            <button class="btn btn-success" type="submit">
+                Я пойду!
+            </button>
+        } |
+        <input type="button" class="btn btn-success" value="Назад"
+               onclick="location.href='@Url.Action("List", "Activity")'" />
+    </p>
+</div>

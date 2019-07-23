@@ -44,6 +44,7 @@ namespace LFG.Domain.Entities
         public DateTime ActivityPostDayTime { get; set; }
         [Required(ErrorMessage = "Пожалуйста, выберите дату и время начала")]
         [Display(Name = "Дата Начала")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yy H:mm:ss tt}"), DataType(DataType.DateTime)]
         public DateTime ActivityStartDayTime { get; set; }
         [Display(Name = "Дата окончания")]
         public Nullable<DateTime> ActivityEndDayTime { get; set; }
@@ -74,6 +75,8 @@ namespace LFG.Domain.Entities
                 ActivityAccess = (ActivityAccessTypes)value;
             }
         }
+
+        [Display(Name = "Уровень доступа")]
         [EnumDataType(typeof(ActivityAccessTypes))]
         public ActivityAccessTypes ActivityAccess { get; set; }
         

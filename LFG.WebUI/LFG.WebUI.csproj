@@ -202,6 +202,7 @@
     <Compile Include="Infrastructure\IdentityHelpers.cs" />
     <Compile Include="Infrastructure\LocationClaimsProvider.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
+    <Compile Include="Models\ActivitiesInfoViewModel.cs" />
     <Compile Include="Models\ActivitiesListViewModel.cs" />
     <Compile Include="Models\PagingInfo.cs" />
     <Compile Include="Models\SubList.cs" />
@@ -233,6 +234,8 @@
     <Content Include="Views\Admin\EditRole.cshtml" />
     <Content Include="Views\Admin\CommitActivityList.cshtml" />
     <Content Include="Views\Claims\Index.cshtml" />
+    <Content Include="Views\Activity\Page.cshtml" />
+    <Content Include="Views\Activity\CreateActivity.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -9,6 +9,7 @@ namespace LFG.Domain.Abstract
 
         void SaveActivity (Activity activity);
         void Commit(Activity activity, AppUser user);
+        void CreateActivity(Activity activity, AppUser currentUser);
 
     }
 }

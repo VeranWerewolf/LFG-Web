@@ -1,14 +1,14 @@
 ﻿<nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">LFG - Найди себе компанию!</a>
+            <a class="navbar-brand" href="/">LFG - Найди себе компанию!</a>
         </div>
         <ul class="nav navbar-nav">
             <li class="active"><a href="/">Главная</a></li>
             @*Autorized*@
             @if (Request.IsAuthenticated)
             {
-                <li><a href="#">Создать мероприятие</a></li>
+                <li><a href="/Activity/CreateActivity">Создать мероприятие</a></li>
             }
             @*Role - Admin, Moderator*@
             @if (Request.IsAuthenticated && User.IsInRole("Moderators"))
@@ -29,7 +29,7 @@
                         </li>
                         <li><a tabindex="-1" href="/Claims/Index">Claims</a></li>
                         <li class="divider"></li>
-                        <li><a tabindex="-1" href="#">Выход</a></li>
+                        <li><a tabindex="-1" href="/User/Logout">Выход</a></li>
                     </ul>
                 </li>
             }
@@ -80,7 +80,7 @@
             @*Autorized*@
             @if (Request.IsAuthenticated)
             {
-                <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Выйти</a></li>
+                <li><a href="/User/Logout"><span class="glyphicon glyphicon-log-out"></span> Выйти</a></li>
             }
         </ul>
     </div>

@@ -6,65 +6,67 @@
 }
 
 <h2>ActivitiesAdministration</h2>
+<div class="panel-body">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ActivityName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ActivityDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ActivityPostDayTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ActivityStartDayTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ActivityEndDayTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsCommited)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ActivityAccessType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ActivityAccess)
+            </th>
+            <th></th>
+        </tr>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ActivityName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ActivityDescription)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ActivityPostDayTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ActivityStartDayTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ActivityEndDayTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsCommited)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ActivityAccessType)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ActivityAccess)
-        </th>
-        <th></th>
-    </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ActivityName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ActivityDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ActivityPostDayTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ActivityStartDayTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ActivityEndDayTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsCommited)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ActivityAccess)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "EditActivity", new { item.ActivityId }) |
+                    @Html.ActionLink("Commit", "CommitActivity", new { item.ActivityId }) |
+                    @Html.ActionLink("Delete", "DeleteActivity", new { item.ActivityId })
+                </td>
+            </tr>
+        }
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ActivityName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ActivityDescription)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ActivityPostDayTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ActivityStartDayTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ActivityEndDayTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsCommited)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ActivityAccess)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "EditActivity", new { item.ActivityId }) |
-            @Html.ActionLink("Commit", "CommitActivity", new { item.ActivityId }) |
-            @Html.ActionLink("Delete", "DeleteActivity", new { item.ActivityId })
-        </td>
-    </tr>
-}
-
-</table>
+    </table>
+</div>
