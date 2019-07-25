@@ -20,15 +20,13 @@ namespace LFG.WebUI.Controllers
     public class AdminController : Controller
     {
         IActivityRepository activityRepository;
-        public AdminController(IActivityRepository repo)
+        IActivityTypeRepository activityTypeRepository;
+        public AdminController(IActivityRepository repo, IActivityTypeRepository repot)
         {
             activityRepository = repo;
-        }
-        IActivityTypeRepository activityTypeRepository;
-        public AdminController(IActivityTypeRepository repo)
-        {
-            activityTypeRepository = repo;
-        }
+            activityTypeRepository = repot;
+        } 
+
         private AppUserManager UserManager
         {
             get
@@ -71,24 +69,30 @@ namespace LFG.WebUI.Controllers
         {
             Activity activity = activityRepository.Activities
                 .FirstOrDefault(g => g.ActivityId == activityId);
-            return View(activity);
+            EditActivityViewModel model = new EditActivityViewModel
+            {
+                Activity = activity,
+                Categories = new SelectList(activityTypeRepository.ActivityTypes, "ActivityTypeId", "ActivityTypeTitle", new ActivityType())
+            };
+            return View(model);
         }
         [HttpPost]
-        public ActionResult EditActivity(Activity activity)
+        public ActionResult EditActivity(EditActivityViewModel model)
         {
-
+            model.Activity.ActivityTypeCurrent = activityTypeRepository.ActivityTypes
+                    .FirstOrDefault(p => p.ActivityTypeId.ToString() == model.CurrentCategory);
             if (ModelState.IsValid)
             {
-                activityRepository.SaveActivity(activity);
-                TempData["message"] = string.Format("Изменения в мероприятии \"{0}\" были сохранены", activity.ActivityName);
+                activityRepository.SaveActivity(model.Activity);
+                TempData["message"] = string.Format("Изменения в мероприятии \"{0}\" были сохранены", model.Activity.ActivityName);
                 return RedirectToAction("ActivitiesAdministration");
             }
             else
             {
                 // Что-то не так со значениями данных
-                TempData["error"] = string.Format("Ошибка при создании мероприятия \"{0}\"! ", activity.ActivityName);
+                TempData["error"] = string.Format("Ошибка при создании мероприятия \"{0}\"! ", model.Activity.ActivityName);
             }
-            return View(activity);
+            return View(model);
         }
         [Authorize(Roles = "Moderators, Administrators")]
         public ViewResult CommitActivityList()

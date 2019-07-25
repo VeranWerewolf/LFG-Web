@@ -9,8 +9,12 @@ namespace LFG.Domain.Concrete
 {
     public class EFActivityRepository : IActivityRepository
     {
-        EFDbContext context = new EFDbContext();
+        EFDbContext context;
 
+        public EFActivityRepository(EFDbContext ctx)
+        {
+            context = ctx;
+        }
 
         public IEnumerable<Activity> Activities
         {
@@ -33,6 +37,7 @@ namespace LFG.Domain.Concrete
                     dbEntry.ActivityStartDayTime = activity.ActivityStartDayTime;
                     dbEntry.ActivityEndDayTime = activity.ActivityEndDayTime;
                     dbEntry.ActivityAccess = activity.ActivityAccess;
+                    dbEntry.ActivityTypeCurrent = activity.ActivityTypeCurrent;
                 }
             }
             context.SaveChanges();
@@ -40,9 +45,8 @@ namespace LFG.Domain.Concrete
 
         public void CreateActivity(Activity activity, AppUser currentUser)
         {
-            AppUserManager userMgr = new AppUserManager(new UserStore<AppUser>(context));
-            AppUser user = userMgr.FindByEmail(currentUser.Email);
-            activity.ActivityCreator = user;
+            activity.ActivityCreator = currentUser;
+            activity.ActivityId = new System.Guid();
             context.Activities.Add(activity);
             context.SaveChanges();
         }

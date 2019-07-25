@@ -79,7 +79,7 @@ namespace LFG.WebUI.Controllers
         }
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(UserCreationModel model)
         {
             if (ModelState.IsValid)

@@ -28,7 +28,7 @@ namespace LFG.UnitTests
             });
 
             // Организация - создание контроллера
-            AdminController controller = new AdminController(mock.Object);
+            AdminController controller = new AdminController(mock.Object, null);
 
             // Действие
             List<Activity> result = ((IEnumerable<Activity>)controller.ActivitiesAdministration().ViewData.Model).ToList();
@@ -82,7 +82,7 @@ namespace LFG.UnitTests
             });
 
             // Организация - создание контроллера
-            AdminController controller = new AdminController(mock.Object);
+            AdminController controller = new AdminController(mock.Object, null);
             List<Activity> result = ((IEnumerable<Activity>)controller.ActivitiesAdministration().ViewData.Model).ToList();
 
             // Действие
@@ -111,7 +111,7 @@ namespace LFG.UnitTests
             });
 
             // Организация - создание контроллера
-            AdminController controller = new AdminController(mock.Object);
+            AdminController controller = new AdminController(mock.Object, null);
 
             // Действие
             Activity result = controller.EditActivity(Guid.NewGuid()).ViewData.Model as Activity;
@@ -126,7 +126,7 @@ namespace LFG.UnitTests
             Mock<IActivityRepository> mock = new Mock<IActivityRepository>();
 
             // Организация - создание контроллера
-            AdminController controller = new AdminController(mock.Object);
+            AdminController controller = new AdminController(mock.Object, null);
 
             // Организация - создание объекта Game
             Activity game = new Activity { ActivityName = "Test" };
@@ -148,7 +148,7 @@ namespace LFG.UnitTests
             Mock<IActivityRepository> mock = new Mock<IActivityRepository>();
 
             // Организация - создание контроллера
-            AdminController controller = new AdminController(mock.Object);
+            AdminController controller = new AdminController(mock.Object,null);
 
             // Организация - создание объекта Game
             Activity game = new Activity { ActivityName = "Test" };

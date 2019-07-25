@@ -16,10 +16,14 @@ namespace LFG.WebUI.Controllers
     public class ActivityController : Controller
     {
         private IActivityRepository activityRepository;
-        public ActivityController(IActivityRepository repo)
+        private IActivityTypeRepository activityTypeRepository;
+        public ActivityController(IActivityRepository repo, IActivityTypeRepository repot)
         {
             activityRepository = repo;
+            activityTypeRepository = repot;
         }
+
+
         public int pageSize = 4;
         private AppUserManager UserManager
         {
@@ -78,24 +82,34 @@ namespace LFG.WebUI.Controllers
 
         public ViewResult CreateActivity()
         {
-            return View();
+            EditActivityViewModel model = new EditActivityViewModel
+            {
+                Categories = new SelectList(activityTypeRepository.ActivityTypes, "ActivityTypeId", "ActivityTypeTitle", new ActivityType())
+            };
+            return View(model);
         }
 
         [HttpPost]
-        public ActionResult CreateActivity(Activity activity)
+        public ActionResult CreateActivity(EditActivityViewModel model)
         {
+            //ActivityType type = activityTypeRepository.ActivityTypes.FirstOrDefault(x => x.ToString() );
+            //activity.ActivityTypeCurrent = type;
+            
             if (ModelState.IsValid)
             {
-                activityRepository.CreateActivity(activity, CurrentUser);
-                TempData["message"] = string.Format("Изменения в мероприятии \"{0}\" были сохранены", activity.ActivityName);
-                return RedirectToAction("List");
+                model.Activity.ActivityTypeCurrent = activityTypeRepository.ActivityTypes
+                    .FirstOrDefault(p => p.ActivityTypeId.ToString() == model.CurrentCategory);
+
+                activityRepository.CreateActivity(model.Activity, CurrentUser);
+                TempData["message"] = string.Format("Изменения в мероприятии \"{0}\" были сохранены", model.Activity.ActivityName);
+                return RedirectToAction("List", "Activity", null);
             }
             else
             {
                 // Что-то не так со значениями данных
-                TempData["error"] = string.Format("Ошибка при создании мероприятия \"{0}\"! ", activity.ActivityName);
+                TempData["error"] = string.Format("Ошибка при создании мероприятия \"{0}\"! ", model.Activity.ActivityName);
             }
-            return View("List");
+            return RedirectToAction("List", "Activity", null);
         }
 
         [HttpPost]

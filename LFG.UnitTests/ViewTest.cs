@@ -22,13 +22,13 @@ namespace LFG.UnitTests
             Mock<IActivityRepository> mock = new Mock<IActivityRepository>();
             mock.Setup(m => m.Activities).Returns(new List<Activity>
             {
-                new Activity { ActivityId = Guid.NewGuid(), ActivityName = "Игра1"},
-                new Activity { ActivityId = Guid.NewGuid(), ActivityName = "Игра2"},
-                new Activity { ActivityId = Guid.NewGuid(), ActivityName = "Игра3"},
-                new Activity { ActivityId = Guid.NewGuid(), ActivityName = "Игра4"},
-                new Activity { ActivityId = Guid.NewGuid(), ActivityName = "Игра5"}
+                new Activity { ActivityId = Guid.NewGuid(), ActivityName = "Игра1", IsCommited= true},
+                new Activity { ActivityId = Guid.NewGuid(), ActivityName = "Игра2", IsCommited= true},
+                new Activity { ActivityId = Guid.NewGuid(), ActivityName = "Игра3", IsCommited= true},
+                new Activity { ActivityId = Guid.NewGuid(), ActivityName = "Игра4", IsCommited= true},
+                new Activity { ActivityId = Guid.NewGuid(), ActivityName = "Игра5", IsCommited= true}
             });
-            ActivityController controller = new ActivityController(mock.Object)
+            ActivityController controller = new ActivityController(mock.Object,null)
             {
                 pageSize = 3
             };
@@ -84,7 +84,7 @@ namespace LFG.UnitTests
                 new Activity { ActivityId = Guid.NewGuid(), ActivityName = "Игра4"},
                 new Activity { ActivityId = Guid.NewGuid(), ActivityName = "Игра5"}
             });
-            ActivityController controller = new ActivityController(mock.Object)
+            ActivityController controller = new ActivityController(mock.Object, null)
             {
                 pageSize = 3
             };
@@ -112,13 +112,13 @@ namespace LFG.UnitTests
             mock.Setup(m => m.Activities).Returns(new List<Activity>
                 {
 
-                    new Activity { ActivityId = Guid.NewGuid(), ActivityName = "Игра1", ActivityTypeCurrent = type1},
-                    new Activity { ActivityId = Guid.NewGuid(), ActivityName = "Игра2", ActivityTypeCurrent = type1},
-                    new Activity { ActivityId = Guid.NewGuid(), ActivityName = "Игра3", ActivityTypeCurrent = type2},
-                    new Activity { ActivityId = Guid.NewGuid(), ActivityName = "Игра4", ActivityTypeCurrent = type1},
-                    new Activity { ActivityId = Guid.NewGuid(), ActivityName = "Игра5", ActivityTypeCurrent = type2}
+                    new Activity { ActivityId = Guid.NewGuid(), ActivityName = "Игра1", ActivityTypeCurrent = type1, IsCommited= true},
+                    new Activity { ActivityId = Guid.NewGuid(), ActivityName = "Игра2", ActivityTypeCurrent = type1, IsCommited= true},
+                    new Activity { ActivityId = Guid.NewGuid(), ActivityName = "Игра3", ActivityTypeCurrent = type2, IsCommited= true},
+                    new Activity { ActivityId = Guid.NewGuid(), ActivityName = "Игра4", ActivityTypeCurrent = type1, IsCommited= true},
+                    new Activity { ActivityId = Guid.NewGuid(), ActivityName = "Игра5", ActivityTypeCurrent = type2, IsCommited= true}
                 });
-            ActivityController controller = new ActivityController(mock.Object)
+            ActivityController controller = new ActivityController(mock.Object,null)
             {
                 pageSize = 3
             };
@@ -211,7 +211,7 @@ namespace LFG.UnitTests
                 new Activity { ActivityId = Guid.NewGuid(), ActivityName = "Игра4", ActivityTypeCurrent = type3},
                 new Activity { ActivityId = Guid.NewGuid(), ActivityName = "Игра5", ActivityTypeCurrent = type2}
                 });
-            ActivityController controller = new ActivityController(mock.Object) { pageSize = 3 };
+            ActivityController controller = new ActivityController(mock.Object, null) { pageSize = 3 };
 
             // Действие - тестирование счетчиков товаров для различных категорий
             int res1 = ((ActivitiesListViewModel)controller.List("Один").Model).PagingInfo.TotalItems;

@@ -134,7 +134,8 @@ namespace LFG.Domain.Migrations
                 ActivityEndDayTime = DateTime.Now.AddDays(20).AddHours(1),
                 ActivityAccess = ActivityAccessTypes.Public,
                 ActivityTypeCurrent = type10,
-                ActivityCreator = user1
+                ActivityCreator = user1,
+                IsCommited = true
 
             };
             Activity activity2 = new Activity()
@@ -146,7 +147,8 @@ namespace LFG.Domain.Migrations
                 ActivityEndDayTime = DateTime.Now.AddDays(20).AddHours(1),
                 ActivityAccess = ActivityAccessTypes.Protected,
                 ActivityTypeCurrent = type10,
-                ActivityCreator = user1
+                ActivityCreator = user1,
+                IsCommited = true
             };
             Activity activity3 = new Activity()
             {
@@ -157,7 +159,8 @@ namespace LFG.Domain.Migrations
                 ActivityEndDayTime = DateTime.Now.AddDays(20).AddHours(1),
                 ActivityAccess = ActivityAccessTypes.Private,
                 ActivityTypeCurrent = type10,
-                ActivityCreator = user1
+                ActivityCreator = user1,
+                IsCommited = true
             };
             Activity activity4 = new Activity()
             {
@@ -168,7 +171,8 @@ namespace LFG.Domain.Migrations
                 ActivityEndDayTime = DateTime.Now.AddDays(21).AddHours(12),
                 ActivityAccess = ActivityAccessTypes.Public,
                 ActivityTypeCurrent = type11,
-                ActivityCreator = user
+                ActivityCreator = user,
+                IsCommited = true
             };
             Activity activity5 = new Activity()
             {
@@ -179,7 +183,8 @@ namespace LFG.Domain.Migrations
                 ActivityEndDayTime = DateTime.Now.AddDays(22).AddHours(3),
                 ActivityAccess = ActivityAccessTypes.Public,
                 ActivityTypeCurrent = type12,
-                ActivityCreator = user2
+                ActivityCreator = user2,
+                IsCommited = true
             };
 
             context.Activities.AddRange(new List<Activity> { activity1, activity2, activity3, activity4, activity5 });

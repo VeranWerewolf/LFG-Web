@@ -204,6 +204,7 @@
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Models\ActivitiesInfoViewModel.cs" />
     <Compile Include="Models\ActivitiesListViewModel.cs" />
+    <Compile Include="Models\EditActivityViewModel.cs" />
     <Compile Include="Models\PagingInfo.cs" />
     <Compile Include="Models\SubList.cs" />
     <Compile Include="Models\UserViewModels.cs" />

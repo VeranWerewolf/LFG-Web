@@ -1,5 +1,4 @@
-﻿@using LFG.Domain.Entities
-@model Activity
+﻿@model LFG.WebUI.Models.EditActivityViewModel
 
 @{
     ViewBag.Title = "Админ-панель: Редактирование мероприятия";
@@ -17,55 +16,71 @@
             <h4>Activity</h4>
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @Html.HiddenFor(model => model.ActivityId)
+            @Html.HiddenFor(model => model.Activity.ActivityId)
 
             <div class="form-group">
-                @Html.LabelFor(model => model.ActivityName, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.Activity.ActivityName, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.ActivityName, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.ActivityName, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.Activity.ActivityName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Activity.ActivityName, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.ActivityDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.Activity.ActivityDescription, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.ActivityDescription, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.ActivityDescription, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.Activity.ActivityDescription, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Activity.ActivityDescription, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.ActivityStartDayTime, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.Activity.ActivityStartDayTime, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     <div class='input-group date' id='datetimepicker1'>
-                        @Html.EditorFor(model => model.ActivityStartDayTime, new { @type = "text", @class = "form-control" })
+                        @Html.EditorFor(model => model.Activity.ActivityStartDayTime, new { @type = "text", @class = "form-control" })
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                         </span>
                     </div>
-                    @Html.ValidationMessageFor(model => model.ActivityStartDayTime, "", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(model => model.Activity.ActivityStartDayTime, "", new { @class = "text-danger" })
                 </div>
             </div>
-
+            <script>
+                $(function () {
+                    $('#datetimepicker1').datetimepicker({ showClose: true, format: 'MM-DD-YYYY HH:mm', stepping: 10 });
+                });
+            </script>
             <div class="form-group">
-                @Html.LabelFor(model => model.ActivityEndDayTime, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.Activity.ActivityEndDayTime, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    <div class='input-group date' id='datetimepicker1'>
-                        @Html.EditorFor(model => model.ActivityEndDayTime, new { htmlAttributes = new { @class = "form-control" } })
+                    <div class='input-group date' id='datetimepicker2'>
+                        @Html.EditorFor(model => model.Activity.ActivityEndDayTime, new { @type = "text", @class = "form-control" })
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                         </span>
                     </div>
-                    @Html.ValidationMessageFor(model => model.ActivityEndDayTime, "", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(model => model.Activity.ActivityEndDayTime, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <script>
+                $(function () {
+                    $('#datetimepicker2').datetimepicker({ showClose: true, format: 'MM-DD-YYYY HH:mm', stepping: 10 });
+                });
+            </script>
+            <div class="form-group">
+                @Html.LabelFor(model => model.CurrentCategory, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.CurrentCategory, (SelectList)Model.Categories, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.CurrentCategory, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.ActivityAccess, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.Activity.ActivityAccess, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EnumDropDownListFor(model => model.ActivityAccess, htmlAttributes: new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.ActivityAccess, "", new { @class = "text-danger" })
+                    @Html.EnumDropDownListFor(model => model.Activity.ActivityAccess, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Activity.ActivityAccess, "", new { @class = "text-danger" })
                 </div>
             </div>
 

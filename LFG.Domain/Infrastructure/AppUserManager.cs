@@ -24,10 +24,12 @@ namespace LFG.Domain.Infrastructure
             IdentityFactoryOptions<AppUserManager> options, IOwinContext context)
         {
             AppUserManager manager = new AppUserManager(
-                new UserStore<AppUser>(context.Get<EFDbContext>()));
+                new UserStore<AppUser>(context.Get<EFDbContext>()))
+            {
 
-            // optionally configure your manager
-            manager.UserValidator = new CustomUserValidator();
+                // optionally configure your manager
+                UserValidator = new CustomUserValidator()
+            };
 
             return manager;
         }

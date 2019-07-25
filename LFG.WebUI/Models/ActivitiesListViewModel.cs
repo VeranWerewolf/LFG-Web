@@ -11,6 +11,8 @@ namespace LFG.WebUI.Models
         public IEnumerable<Activity> Activities { get; set; }
         public PagingInfo PagingInfo { get; set; }
         public string CurrentCategory { get; set; }
-        public ActivityType ActivityType { get; set; }
+        //public string ActivityAccess { get; set; }
+        //public ActivityType ActivityType { get; set; }
+        //public ActivityToActivityTypes ActivityToActivityTypes { get; set; }
     }
 }
