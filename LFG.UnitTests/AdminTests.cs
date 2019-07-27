@@ -72,13 +72,17 @@ namespace LFG.UnitTests
         {
             // Организация - создание имитированного хранилища данных
             Mock<IActivityRepository> mock = new Mock<IActivityRepository>();
+            ActivityType type1 = new ActivityType { ActivityTypeId = Guid.NewGuid(), ActivityTypeTitle = "Один" };
+            ActivityType type2 = new ActivityType { ActivityTypeId = Guid.NewGuid(), ActivityTypeTitle = "Два" };
+            ActivityType type3 = new ActivityType { ActivityTypeId = Guid.NewGuid(), ActivityTypeTitle = "Три" };
+
             mock.Setup(m => m.Activities).Returns(new List<Activity>
             {
-                new Activity { ActivityId = Guid.NewGuid(), ActivityName = "Игра1"},
-                new Activity { ActivityId = Guid.NewGuid(), ActivityName = "Игра2"},
-                new Activity { ActivityId = Guid.NewGuid(), ActivityName = "Игра3"},
-                new Activity { ActivityId = Guid.NewGuid(), ActivityName = "Игра4"},
-                new Activity { ActivityId = Guid.NewGuid(), ActivityName = "Игра5"}
+                new Activity { ActivityId = Guid.NewGuid(), ActivityName = "Игра1", ActivityTypeCurrent = type1},
+                new Activity { ActivityId = Guid.NewGuid(), ActivityName = "Игра2", ActivityTypeCurrent = type1},
+                new Activity { ActivityId = Guid.NewGuid(), ActivityName = "Игра3", ActivityTypeCurrent = type2},
+                new Activity { ActivityId = Guid.NewGuid(), ActivityName = "Игра4", ActivityTypeCurrent = type2},
+                new Activity { ActivityId = Guid.NewGuid(), ActivityName = "Игра5", ActivityTypeCurrent = type3}
             });
 
             // Организация - создание контроллера
@@ -132,7 +136,7 @@ namespace LFG.UnitTests
             Activity game = new Activity { ActivityName = "Test" };
 
             // Действие - попытка сохранения товара
-            ActionResult result = controller.EditActivity(game);
+            ActionResult result = controller.EditActivity(game.ActivityId);
 
             // Утверждение - проверка того, что к хранилищу производится обращение
             mock.Verify(m => m.SaveActivity(game));
@@ -157,7 +161,7 @@ namespace LFG.UnitTests
             controller.ModelState.AddModelError("error", "error");
 
             // Действие - попытка сохранения товара
-            ActionResult result = controller.EditActivity(game);
+            ActionResult result = controller.EditActivity(game.ActivityId);
 
             // Утверждение - проверка того, что обращение к хранилищу НЕ производится 
             mock.Verify(m => m.SaveActivity(It.IsAny<Activity>()), Times.Never());

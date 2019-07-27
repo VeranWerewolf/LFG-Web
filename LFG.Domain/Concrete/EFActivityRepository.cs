@@ -45,7 +45,9 @@ namespace LFG.Domain.Concrete
 
         public void CreateActivity(Activity activity, AppUser currentUser)
         {
-            activity.ActivityCreator = currentUser;
+            AppUserManager userMgr = new AppUserManager(new UserStore<AppUser>(context));
+            AppUser user = userMgr.FindByEmail(currentUser.Email);
+            activity.ActivityCreator = user;
             activity.ActivityId = new System.Guid();
             context.Activities.Add(activity);
             context.SaveChanges();

@@ -35,8 +35,6 @@ namespace LFG.WebUI.Infrastructure
         // Здесь размещаются привязки
         private void AddBindings()
         {
-            //kernel.Bind<IActivityRepository>().ToSelf().InRequestScope();
-            //kernel.Bind<IActivityRepository>().ToSelf().InRequestScope();
             kernel.Bind<EFDbContext>().ToSelf().InRequestScope();
             kernel.Bind<IActivityRepository>().To<EFActivityRepository>().InRequestScope();
             kernel.Bind<IActivityTypeRepository>().To<EFActivityTypeRepository>().InRequestScope();

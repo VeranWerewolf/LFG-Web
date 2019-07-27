@@ -22,11 +22,6 @@ namespace LFG.Domain.Concrete
         {
             Database.SetInitializer<EFDbContext>(new LFGDbInitializer());
         }
-
-        //public System.Data.Entity.DbSet<LFG.Domain.Entities.AppRole> IdentityRoles { get; set; }
-
-        //Multiply DataSets Users and AppUsers
-        //public System.Data.Entity.DbSet<LFG.Domain.Entities.AppUser> AppUsers { get; set; }
     }
 
     public class LFGDbInitializer : NullDatabaseInitializer<EFDbContext>
