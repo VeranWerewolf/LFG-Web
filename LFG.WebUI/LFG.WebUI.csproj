@@ -237,6 +237,7 @@
     <Content Include="Views\Claims\Index.cshtml" />
     <Content Include="Views\Activity\Page.cshtml" />
     <Content Include="Views\Activity\CreateActivity.cshtml" />
+    <Content Include="Views\Activity\CreatedActivities.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,0 +1,23 @@
+﻿@using LFG.WebUI.Models
+@using LFG.WebUI.HtmlHelpers
+@model ActivitiesListViewModel
+
+@{
+    ViewBag.Title = "Мои мероприятия";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="categories" class="col-xs-3">
+    @Html.Action("Menu", "Nav")
+</div>
+<div class="col-xs-8">
+    <div class="btn-group pull-left">
+        @Html.PageLinks(Model.PagingInfo, x => Url.Action("List", new { page = x, category = Model.CurrentCategory }))
+    </div>
+    <br>
+    <br>
+    @foreach (var p in @Model.Activities)
+    {
+        @Html.Partial("ActivitySummary", p)
+    }
+</div>

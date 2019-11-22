@@ -8,6 +8,7 @@ using LFG.Domain.Entities;
 using LFG.Domain.Infrastructure;
 using LFG.WebUI.Models;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 
 namespace LFG.WebUI.Controllers
@@ -71,6 +72,7 @@ namespace LFG.WebUI.Controllers
             };
             return View(model);
         }
+
         [AllowAnonymous]
         public ViewResult Page(string id)
         {
@@ -110,6 +112,36 @@ namespace LFG.WebUI.Controllers
                 TempData["error"] = string.Format("Ошибка при создании мероприятия \"{0}\"! ", model.Activity.ActivityName);
             }
             return RedirectToAction("List", "Activity", null);
+        }
+
+        public ViewResult CreatedActivities(string category, int page = 1)
+        {
+            
+            AppUser user = UserManager.FindByEmail(CurrentUser.Email);
+            ActivitiesListViewModel model = new ActivitiesListViewModel
+            {
+                Activities = activityRepository.Activities
+                    .Where(p => p.ActivityCreator == user)
+                    .Where(p => category == null || p.ActivityTypeCurrent.ToString() == category)
+                    .OrderBy(Activity => Activity.ActivityStartDayTime)
+                    .Skip((page - 1) * pageSize)
+                    .Take(pageSize),
+                PagingInfo = new PagingInfo
+                {
+                    CurrentPage = page,
+                    ItemsPerPage = pageSize,
+
+                    TotalItems = category == null ?
+                    activityRepository.Activities
+                    .Where(p => !p.ActivityAccess.Equals(ActivityAccessTypes.Private)).Count() :
+                    activityRepository.Activities
+                    .Where(p => !p.ActivityAccess.Equals(ActivityAccessTypes.Private))
+                    .Where(p => p.ActivityTypeCurrent.ToString() == category)
+                    .Count()
+                },
+                CurrentCategory = category
+            };
+            return View(model);
         }
 
         [HttpPost]
